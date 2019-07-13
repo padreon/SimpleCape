@@ -5,7 +5,5 @@ version: 3.0.0
 author: padreon
 commands:
   cape:
-    default: op
-    permission: simple.cape
-    description: "set cape for player"
-    usage: /cape
+    usage: /cape <name of cape>
+    description: set cape for player
