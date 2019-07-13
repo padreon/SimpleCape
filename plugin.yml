@@ -1,0 +1,11 @@
+name: SimpleCape
+api: [3.0.0]
+main: padreon\SimpleCape\Main
+version: 3.0.0
+author: padreon
+commands:
+  cape:
+    default: op
+    permission: simple.cape
+    description: "set cape for player"
+    usage: /cape
