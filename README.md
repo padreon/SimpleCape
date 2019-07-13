@@ -14,6 +14,7 @@ Cape Plugin for PMMP
 ### Permissions
 1. simple.cape = set cape for your self
 2. simple.cape.other = set cape for another player
+3. simple.cape.name.(NameOfCape) = permission player per cape [Example: simple.cape.name.diamond]
 
 ### QnA
 Q: How to enable GD?\
