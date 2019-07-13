@@ -118,7 +118,6 @@ class Main extends PluginBase{
         return true;
     }
 
-
     /**
      * @param Player $player
      * @param string $cape
