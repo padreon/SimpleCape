@@ -55,7 +55,7 @@ class Main extends PluginBase{
                             $this->setCape($sender, "");
                             return true;
                         }
-                        if ($sender->hasPermission("simple.cape.name." . $args[0])){
+                        if (!$sender->hasPermission("simple.cape.name." . $args[0])){
                             $sender->sendMessage(TextFormat::RED . "You don't have permission to use this cape");
                         }
                             $this->createCape($sender, $args[0]);
