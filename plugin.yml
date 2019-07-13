@@ -1,7 +1,7 @@
 name: SimpleCape
 api: [3.0.0]
 main: padreon\SimpleCape\Main
-version: 3.0.0
+version: 1.0.0
 author: padreon
 commands:
   cape:
