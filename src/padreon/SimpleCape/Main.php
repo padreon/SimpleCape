@@ -140,7 +140,7 @@ class Main extends PluginBase{
             return true;
         }
         if (!$sender == null) {
-            $sender->sendMessage(TextFormat::GREEN . "Successfully remove cape from"  . $player->getName());
+            $sender->sendMessage(TextFormat::GREEN . "Successfully remove cape from "  . $player->getName());
             return true;
         }
         $player->sendMessage(TextFormat::GREEN . "Successfully remove cape");
