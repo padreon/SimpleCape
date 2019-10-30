@@ -27,7 +27,7 @@ class Main extends PluginBase{
     public function onEnable(){
         if (!extension_loaded("gd")){
             $this->getServer()->getLogger()->error("please enable gd!");
-            $this->getServer()->disablePlugins();
+            $this->getServer()->getPluginManager()->disablePlugin($this);
             return true;
         }
         @mkdir($this->getDataFolder());
@@ -43,50 +43,44 @@ class Main extends PluginBase{
      * @return bool
      */
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool{
-        if ($command->getName() == "cape"){
-            if (!$sender->hasPermission("simple.cape")) {
-                $sender->sendMessage(TextFormat::RED . "You don't have permission to use command");
-                return true;
-            }
-            if ($sender->hasPermission("simple.cape")) {
-                if (count($args) === 1) {
-                    if ($sender instanceof Player) {
-                        if ($args[0] == "remove") {
-                            $this->setCape($sender, "");
-                            return true;
-                        }
-                        if (!$sender->hasPermission("simple.cape.name." . $args[0])){
-                            $sender->sendMessage(TextFormat::RED . "You don't have permission to use this cape");
-                            return true;
-                        }
-                        $this->createCape($sender, $args[0]);
+        if ($command->getName() == "cape") {
+            if (count($args) === 1) {
+                if ($sender instanceof Player) {
+                    if ($args[0] == "remove") {
+                        $this->setCape($sender, "");
                         return true;
                     }
-                }
-                if (count($args) === 2) {
-                    if (!$sender->hasPermission("simple.cape.other")) {
-                        $sender->sendMessage(TextFormat::RED . "You don't have permission to use command");
+                    if (!$sender->hasPermission("simple.cape.name." . $args[0])) {
+                        $sender->sendMessage(TextFormat::RED . "You don't have permission to use this cape");
                         return true;
                     }
-                    $target = $this->getServer()->getPlayer($args[1]);
-                    if ($target instanceof Player){
-                        if ($target->isOnline()) {
-                            if ($args[0] === "remove"){
-                                $this->setCape($target, "", $sender);
-                                return true;
-                            }
-                            $this->createCape($target, $args[0], $sender);
-                            return true;
-                        }
-                        $sender->sendMessage(TextFormat::RED . "Player not online!");
-                        return true;
-                    }
-                    $sender->sendMessage(TextFormat::RED . "Player not found");
+                    $this->createCape($sender, $args[0]);
                     return true;
                 }
-                $sender->sendMessage($command->getUsage());
+            }
+            if (count($args) === 2) {
+                if (!$sender->hasPermission("simple.cape.other")) {
+                    $sender->sendMessage(TextFormat::RED . "You don't have permission to use command");
+                    return true;
+                }
+                $target = $this->getServer()->getPlayer($args[1]);
+                if ($target instanceof Player) {
+                    if ($target->isOnline()) {
+                        if ($args[0] === "remove") {
+                            $this->setCape($target, "", $sender);
+                            return true;
+                        }
+                        $this->createCape($target, $args[0], $sender);
+                        return true;
+                    }
+                    $sender->sendMessage(TextFormat::RED . "Player not online!");
+                    return true;
+                }
+                $sender->sendMessage(TextFormat::RED . "Player not found");
                 return true;
             }
+            $sender->sendMessage($command->getUsage());
+            return true;
         }
         return true;
     }
@@ -130,8 +124,7 @@ class Main extends PluginBase{
      */
     public function setCape(Player $player, string $cape, CommandSender $sender = null){
         $oldSkin = $player->getSkin();
-        $skin = [$oldSkin->getSkinId(), $oldSkin->getSkinData(), $cape, $oldSkin->getGeometryName(), $oldSkin->getGeometryData()];
-        $newSkin = new Skin($skin[0], $skin[1], $skin[2], $skin[3], $skin[4]);
+        $newSkin = new Skin($oldSkin->getSkinId(), $oldSkin->getSkinData(), $cape, $oldSkin->getGeometryName(), $oldSkin->getGeometryData());
         $player->setSkin($newSkin);
         $player->sendSkin();
         if (!$cape == null) {
