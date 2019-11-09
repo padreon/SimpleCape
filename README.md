@@ -3,18 +3,17 @@ Cape Plugin for PMMP
 
 
 ![](icon.png)
-### How To Use
+### How To Use?
 1. enable gd lib
-2. add cape file (png) to directory plugin/SimpleCape
+2. add cape file (png) to directory plugin_data/SimpleCape
 
 ## Commands
-1. command for player /cape [name of cape]
-2. use command for admin /cape [name of cape] [target user]
+1. command for player /cape [name_of_cape | remove]
+2. use command for admin /cape [name_of_cape | remove] [target user]
 
 ### Permissions
-1. simple.cape = set cape for your self
-2. simple.cape.other = set cape for another player
-3. simple.cape.name.(NameOfCape) = permission player per cape [Example: simple.cape.name.diamond]
+1. simple.cape.admin = set cape for another player (admin)
+2. simple.cape.(NameOfCape) = permission player per cape [Example: simple.cape.diamond]
 
 ### QnA
 Q: How to enable GD?\

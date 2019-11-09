@@ -34,7 +34,6 @@ class Main extends PluginBase{
         $this->saveResource('cape.png');
         return true;
     }
-
     /**
      * @param CommandSender $sender
      * @param Command $command
@@ -50,7 +49,7 @@ class Main extends PluginBase{
                         $this->setCape($sender, "");
                         return true;
                     }
-                    if (!$sender->hasPermission("simple.cape.name." . $args[0])) {
+                    if (!$sender->hasPermission("simple.cape." . $args[0])) {
                         $sender->sendMessage(TextFormat::RED . "You don't have permission to use this cape");
                         return true;
                     }
@@ -59,7 +58,7 @@ class Main extends PluginBase{
                 }
             }
             if (count($args) === 2) {
-                if (!$sender->hasPermission("simple.cape.other")) {
+                if (!$sender->hasPermission("simple.cape.admin")) {
                     $sender->sendMessage(TextFormat::RED . "You don't have permission to use command");
                     return true;
                 }
@@ -93,27 +92,34 @@ class Main extends PluginBase{
     public function createCape(Player $player, string $file, CommandSender $sender = null){
         $ex = '.png';
         $path = $this->getDataFolder() . $file . $ex;
-        $img = imagecreatefrompng($path);
-        $rgba = "";
-        for($y = 0; $y < imagesy($img); $y++) {
-            for($x = 0; $x < imagesx($img); $x++) {
-                $rgb = imagecolorat($img, $x, $y);
-                $r = ($rgb >> 16) & 0xFF;
-                $g = ($rgb >> 8) & 0xFF;
-                $b = $rgb & 0xFF;
-                $rgba .= chr($r).chr($g).chr($b).chr(255);
-            }
-        }
-        if (!strlen($rgba) == 8192){
+        if (!file_exists($path)){
+            $player->sendMessage($file .  " cape not found");
             if (!$sender == null){
-                $sender->sendMessage(TextFormat::RED . "Invalid cape");
-                return true;
+                $sender->sendMessage($file .  " cape not found");
             }
-            $player->sendMessage(TextFormat::RED . "Invalid cape");
             return true;
         }
-        $this->setCape($player, $rgba, $sender);
-        return true;
+            $img = imagecreatefrompng($path);
+            $rgba = "";
+            for ($y = 0; $y < imagesy($img); $y++) {
+                for ($x = 0; $x < imagesx($img); $x++) {
+                    $rgb = imagecolorat($img, $x, $y);
+                    $r = ($rgb >> 16) & 0xFF;
+                    $g = ($rgb >> 8) & 0xFF;
+                    $b = $rgb & 0xFF;
+                    $rgba .= chr($r) . chr($g) . chr($b) . chr(255);
+                }
+            }
+            if (!strlen($rgba) == 8192) {
+                if (!$sender == null) {
+                    $sender->sendMessage(TextFormat::RED . "Invalid cape");
+                    return true;
+                }
+                $player->sendMessage(TextFormat::RED . "Invalid cape");
+                return true;
+            }
+            $this->setCape($player, $rgba, $sender);
+            return true;
     }
 
     /**
