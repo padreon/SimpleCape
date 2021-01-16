@@ -103,11 +103,8 @@ class Main extends PluginBase{
             $rgba = "";
             for ($y = 0; $y < imagesy($img); $y++) {
                 for ($x = 0; $x < imagesx($img); $x++) {
-                    $rgb = imagecolorat($img, $x, $y);
-                    $r = ($rgb >> 16) & 0xFF;
-                    $g = ($rgb >> 8) & 0xFF;
-                    $b = $rgb & 0xFF;
-                    $rgba .= chr($r) . chr($g) . chr($b) . chr(255);
+                    $argb = imagecolorat($img, $x, $y);
+                    $rgba .= chr(($argb >> 16) & 0xff) . chr(($argb >> 8) & 0xff) . chr($argb & 0xff) . chr(((~((int)($argb >> 24))) << 1) & 0xff);
                 }
             }
             if (!strlen($rgba) == 8192) {
