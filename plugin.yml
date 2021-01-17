@@ -1,9 +1,14 @@
 name: SimpleCape
-api: [3.0.0]
 main: padreon\SimpleCape\Main
+website: https://github.com/padreon/SimpleCape
+description: This is a SimpleCape plugin for Servers
+api: 3.0.0
 version: 1.0.0
 author: padreon
 commands:
   cape:
-    usage: /cape <name of cape>
     description: set cape for player
+    usage: /cape <cape-name>
+permissions:
+    simple.cape.admin:
+      default: OP
