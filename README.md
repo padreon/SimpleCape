@@ -12,8 +12,8 @@ Cape Plugin for PMMP
 2. use command for admin /cape [name_of_cape | remove] [target user]
 
 ### Permissions
-1. simple.cape.admin = set cape for another player (admin)
-2. simple.cape.(NameOfCape) = permission player per cape [Example: simple.cape.diamond]
+1. simplecape.admin = set or remove cape for another player (admin)
+2. simplecape.name.(NameOfCape) = permission player per cape [Example: simplecape.name.diamond]
 
 ### QnA
 Q: How to enable GD?\
