@@ -128,15 +128,15 @@ class Main extends PluginBase{
         $newSkin = new Skin($oldSkin->getSkinId(), $oldSkin->getSkinData(), $cape, $oldSkin->getGeometryName(), $oldSkin->getGeometryData());
         $player->setSkin($newSkin);
         $player->sendSkin();
-        if (!$cape === null) {
-            if (!$sender === null) {
+        if ($cape !== null) {
+            if ($sender !== null) {
                 $sender->sendMessage(TextFormat::GREEN . "Successfully add cape to " . $player->getName());
                 return true;
             }
             $player->sendMessage(TextFormat::GREEN . "Successfully add cape");
             return true;
         }
-        if (!$sender === null) {
+        if ($sender !== null) {
             $sender->sendMessage(TextFormat::GREEN . "Successfully remove cape from "  . $player->getName());
             return true;
         }
