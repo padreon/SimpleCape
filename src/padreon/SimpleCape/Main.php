@@ -43,7 +43,7 @@ class Main extends PluginBase{
         if ($command->getName() == "cape") {
             if (count($args) === 1) {
                 if ($sender instanceof Player) {
-                    if ($args[0] == "remove") {
+                    if ($args[0] === "remove") {
                         $this->setCape($sender, "");
                         return true;
                     }
