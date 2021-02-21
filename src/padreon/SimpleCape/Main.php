@@ -40,7 +40,7 @@ class Main extends PluginBase{
      * @return bool
      */
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool{
-        if ($command->getName() == "cape") {
+        if ($command->getName() === "cape") {
             if (count($args) === 1) {
                 if ($sender instanceof Player) {
                     if ($args[0] === "remove") {
@@ -92,7 +92,7 @@ class Main extends PluginBase{
         $path = $this->getDataFolder() . $file . $ex;
         if (!file_exists($path)){
             $player->sendMessage($file .  " cape not found");
-            if (!$sender == null){
+            if (!$sender === null){
                 $sender->sendMessage($file .  " cape not found");
             }
             return true;
@@ -105,8 +105,8 @@ class Main extends PluginBase{
                     $rgba .= chr(($argb >> 16) & 0xff) . chr(($argb >> 8) & 0xff) . chr($argb & 0xff) . chr(((~((int)($argb >> 24))) << 1) & 0xff);
                 }
             }
-            if (!strlen($rgba) == 8192) {
-                if (!$sender == null) {
+            if (!strlen($rgba) === 8192) {
+                if (!$sender === null) {
                     $sender->sendMessage(TextFormat::RED . "Invalid cape");
                     return true;
                 }
@@ -128,15 +128,15 @@ class Main extends PluginBase{
         $newSkin = new Skin($oldSkin->getSkinId(), $oldSkin->getSkinData(), $cape, $oldSkin->getGeometryName(), $oldSkin->getGeometryData());
         $player->setSkin($newSkin);
         $player->sendSkin();
-        if (!$cape == null) {
-            if (!$sender == null) {
+        if (!$cape === null) {
+            if (!$sender === null) {
                 $sender->sendMessage(TextFormat::GREEN . "Successfully add cape to " . $player->getName());
                 return true;
             }
             $player->sendMessage(TextFormat::GREEN . "Successfully add cape");
             return true;
         }
-        if (!$sender == null) {
+        if (!$sender === null) {
             $sender->sendMessage(TextFormat::GREEN . "Successfully remove cape from "  . $player->getName());
             return true;
         }
